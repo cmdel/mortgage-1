@@ -14,6 +14,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+            echo 'export PATH="/home/circleci/.pyenv/bin:$PATH"' >> $BASH_ENV
             pip install --upgrade pip setuptools wheel
             pip install -e .[develop]
       - save_cache:
