@@ -23,7 +23,9 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
-            pytest --cov mortgage
+            pyenv install --skip-existing 3.5.5 3.6.5 3.7-dev
+            pyenv local 3.5.5 3.6.5 3.7-dev
+            detox
             bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path: test-reports
