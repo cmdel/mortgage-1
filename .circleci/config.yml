@@ -13,6 +13,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
+            curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
             pip install --upgrade pip setuptools wheel
             pip install -e .[develop]
       - save_cache:
