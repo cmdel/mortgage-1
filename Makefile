@@ -29,10 +29,14 @@ lint:
 	pycodestyle mortgage --max-line-length=100
 	pydocstyle mortgage
 
+## Code quality
+qa: 
+	mypy -p mortgage --strict
+
 ## run tests quickly with the default Python
 test:
 	pytest --quiet --tb=no --strict --exitfirst
-	cd docs && make doctest
+	#cd docs && make doctest
 
 ## check code coverage quickly with the default Python
 coverage:

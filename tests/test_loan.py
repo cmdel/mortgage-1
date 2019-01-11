@@ -7,11 +7,16 @@ from mortgage import Loan
 def convert(value):
     return Decimal(value).quantize(Decimal('0.01'))
 
+def convert_rate(value):
+    return Decimal(value).quantize(Decimal('1e-6'))
 
 @pytest.fixture(scope='class')
 def loan_200k():
     return Loan(principal=200000, interest=.06, term=30)
 
+@pytest.fixture(scope='class')
+def loan_200k_e():
+    return Loan(principal=200_000, interest=.06, term=20)
 
 class TestLoan(object):
 
@@ -71,6 +76,9 @@ class TestLoan(object):
     def test_apy(self, loan_200k):
         assert loan_200k.apy == convert(6.17)
 
+    def test_ear(self, loan_200k):
+        assert loan_200k.ear == convert(6.17)
+
     def test_apr(self, loan_200k):
         assert loan_200k.apr == convert(6.00)
 
@@ -91,3 +99,6 @@ class TestLoan(object):
 
     def test_years_to_pay(self, loan_200k):
         assert loan_200k.years_to_pay == 30
+
+    def test_aprc(self, loan_200k):
+        assert loan_200k.aprc == convert_rate(.061678)
